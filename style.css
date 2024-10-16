@@ -1,0 +1,372 @@
+/* General Reset */ 
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Keyframe Animations */
+@keyframes scrollText {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+}
+
+@keyframes fadeInZoom {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 10px #e94560, 0 0 20px #e94560; }
+    to { text-shadow: 0 0 20px #ffffff, 0 0 30px #e94560; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes slideIn {
+    from { transform: translateX(-100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes fallIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Moving Banner Styling */
+.moving-banner {
+    width: 100%;
+    background-color: #533483;
+    color: #ffffff;
+    font-family: 'Zen Dots', sans-serif;
+    font-size: 1rem;
+    text-align: center;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    padding: 10px 0;
+    overflow: hidden;
+    animation: fallIn 1s ease-out forwards;
+}
+
+.moving-banner p {
+    display: inline-block;
+    white-space: nowrap;
+    animation: scrollText 25s linear infinite;
+}
+
+/* Modal Styling */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1001;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.modal.open {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    animation: fallIn 1s ease-out forwards;
+}
+
+.modal.fade-out {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+}
+
+/* Modal Content Styling */
+.modal-content {
+    background-color: #1a1a2e;
+    color: #ffffff;
+    font-family: 'Zen Dots', sans-serif;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 400px;
+    margin: 100px auto;
+    text-align: center;
+    position: relative;
+    animation: fadeInZoom 1s ease-in-out, fallIn 1s ease-out forwards;
+}
+
+.modal-content h2 {
+    font-size: 1.5rem;
+    color: #e94560;
+}
+
+.modal-content p {
+    font-size: 1.1rem;
+    margin: 20px 0;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 1.5rem;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+/* Body and Container Styling */
+body {
+    font-family: 'Zen Dots', sans-serif;
+    background-color: #1a1a2e;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow-x: hidden;
+    padding: 80px 20px 20px;
+    animation: fadeInScale 1s ease-out forwards;
+}
+
+.container {
+    text-align: center;
+    max-width: 800px;
+    padding: 20px;
+    animation: fallIn 1s ease-out forwards;
+}
+
+/* Header Styling */
+header h1 {
+    font-size: 2.5rem;
+    color: #e94560;
+    margin-bottom: 10px;
+    animation: fadeInZoom 1.5s ease-in-out, glow 1.5s infinite alternate, bounce 2s infinite ease-in-out, fallIn 1s ease-out forwards;
+    font-weight: 700;
+    
+    letter-spacing: 2px;
+    text-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+}
+
+header p {
+    font-size: 1.2rem;
+    color: #f2f2f2;
+    margin-bottom: 30px;
+    animation: fadeIn 2s ease-in-out, fallIn 1s ease-out forwards;
+    font-weight: 300;
+    max-width: 90%;
+    margin: 0 auto;
+}
+
+/* Game Links Section */
+.game-links {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    animation: slideIn 1s ease-in-out, fallIn 1s ease-out forwards;
+    padding-top: 10px;
+}
+
+/* Game Card Styling with Arcade Button Effect */
+.game-card {
+    background-color: #0f3460;
+    padding: 20px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 1.3rem;
+    font-weight: bold;
+    box-shadow: inset 0 -3px 5px rgba(0, 0, 0, 0.6), 0 10px 20px rgba(0, 0, 0, 0.3);
+    border: 3px solid #333b57;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 100px;
+    background-image: linear-gradient(145deg, #142850, #27496d);
+    background-blend-mode: overlay;
+    animation: fallIn 1s ease-out forwards;
+}
+
+.game-card:hover {
+    transform: translateY(-6px);
+    background-color: #1a3a5f;
+    box-shadow: inset 0 -4px 6px rgba(0, 0, 0, 0.7), 0 14px 25px rgba(0, 0, 0, 0.4), 0 0 20px #e94560;
+}
+
+/* Footer Styling */
+footer {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    animation: fadeIn 2s ease-in-out, fallIn 1s ease-out forwards;
+}
+
+footer p {
+    font-size: 0.9rem;
+    color: #888888;
+    font-weight: 300;
+}
+
+/* Button Style with Arcade Button Texture */
+.buy-coffee, .language-toggle, #modal-close-btn {
+    padding: 12px 24px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #ffffff;
+    background: linear-gradient(145deg, #ff9900, #e08100);
+    border-radius: 10px;
+    text-decoration: none;
+    transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+    font-family: 'Zen Dots', sans-serif;
+    box-shadow: inset 0 -3px 4px rgba(0, 0, 0, 0.4), 0 8px 12px rgba(0, 0, 0, 0.3);
+    border: 3px solid #e08100;
+    background-blend-mode: overlay;
+    animation: fallIn 1s ease-out forwards;
+}
+
+.buy-coffee:hover, .language-toggle:hover, #modal-close-btn:hover {
+    background: linear-gradient(145deg, #e08100, #ff9900);
+    transform: scale(1.05);
+    box-shadow: inset 0 -5px 6px rgba(0, 0, 0, 0.5), 0 10px 16px rgba(0, 0, 0, 0.4), 0 0 20px #ff9900;
+}
+
+/* Additional Animations for Intro Effect */
+@media (prefers-reduced-motion: no-preference) {
+    /* Apply animations only if the user has not requested reduced motion */
+    
+    /* Applying staggered fallIn animations */
+    .moving-banner {
+        animation: fallIn 1s ease-out forwards;
+    }
+    
+    .modal-content {
+        animation: fadeInZoom 1s ease-in-out, fallIn 1s ease-out forwards;
+    }
+    
+    body {
+        animation: fadeInScale 1s ease-out forwards;
+    }
+    
+    .container {
+        animation: fallIn 1s ease-out forwards;
+    }
+    
+    header h1 {
+        animation: fadeInZoom 1.5s ease-in-out, glow 1.5s infinite alternate, bounce 2s infinite ease-in-out, fallIn 1s ease-out forwards;
+    }
+    
+    header p {
+        animation: fadeIn 2s ease-in-out, fallIn 1s ease-out forwards;
+    }
+    
+    .game-links {
+        animation: slideIn 1s ease-in-out, fallIn 1s ease-out forwards;
+    }
+    
+    .game-card {
+        animation: fallIn 1s ease-out forwards;
+    }
+    
+    footer {
+        animation: fadeIn 2s ease-in-out, fallIn 1s ease-out forwards;
+    }
+    
+    .buy-coffee, .language-toggle, #modal-close-btn {
+        animation: fallIn 1s ease-out forwards;
+    }
+}
+
+/* Fade-out Animation */
+.fade-out {
+    opacity: 0;
+    transition: opacity 0.5s ease-out;
+}
+
+/* Fade-in Animation */
+.fade-in {
+    opacity: 1;
+    transition: opacity 0.5s ease-in;
+}
+
+/* Modal Open Animation */
+.modal.open {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    animation: fallIn 1s ease-out forwards;
+}
+
+/* Modal Close Animation */
+.modal.fade-out {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+}
+
+/* Modal Fade-In Keyframes */
+@keyframes modalFadeIn {
+    from { opacity: 0; transform: translateY(-50px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Modal Fade-Out Keyframes */
+@keyframes modalFadeOut {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(-50px); }
+}
+
+/* Ensure Modal Content Animates Correctly */
+.modal.open .modal-content {
+    animation: fadeInZoom 1s ease-in-out, fallIn 1s ease-out forwards;
+}
+
+.modal.fade-out .modal-content {
+    animation: modalFadeOut 0.5s forwards;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2rem;
+    }
+
+    .game-card {
+        font-size: 1.1rem;
+        padding: 15px;
+    }
+
+    .buy-coffee {
+        font-size: 1rem;
+    }
+}
