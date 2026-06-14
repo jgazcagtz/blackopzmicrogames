@@ -1,53 +1,248 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🕹️ BlackOpz MicroGames 🕹️</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="color-scheme" content="light dark">
+    <meta name="description" content="BlackOpz MicroGames is a compact launcher for free browser games.">
+    <title>BlackOpz MicroGames</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3909517762571272"
      crossorigin="anonymous"></script>
+    <script src="script.js" defer></script>
 </head>
 <body>
-    <!-- Moving Banner -->
-    <div class="moving-banner">
-        <p>🎉 All games are free to play! Have fun and support us by donating. 🎉 | ¡Todos los juegos son gratis! Disfruta y apóyanos con una donación. 🎈</p>
-    </div>
+    <a class="skip-link" href="#games">Skip to games</a>
 
-    <!-- Welcome Modal -->
-    <div id="welcome-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" id="close-modal">&times;</span>
-            <h2 id="welcome-title">¡Bienvenidxs!</h2>
-            <p id="welcome-message">Estos juegos son gratuitos. Si te gustan, considera apoyarnos haciendo clic en el botón "Invítame un Café". ☕</p>
-          <p> <button id="modal-language-toggle" class="language-toggle">English</button></p><br>
-            <button id="modal-close-btn" class="language-toggle">Comenzar a Jugar</button>
+    <svg class="icon-sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+        <symbol id="icon-brand" viewBox="0 0 24 24">
+            <path d="M7 5h10a4 4 0 0 1 4 4v6a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a4 4 0 0 1 4-4Z"/>
+            <path d="M8 10v4M6 12h4M15 11h.01M18 13h.01"/>
+        </symbol>
+        <symbol id="icon-language" viewBox="0 0 24 24">
+            <path d="M4 5h9M9 3v2M11.5 5c-.7 3.9-2.7 6.8-6.5 8.5"/>
+            <path d="M5.5 8c1.1 2.3 3 4.2 5.7 5.4M14 20l4-9 4 9M15.3 17h5.4"/>
+        </symbol>
+        <symbol id="icon-sun" viewBox="0 0 24 24">
+            <path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8ZM12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>
+        </symbol>
+        <symbol id="icon-moon" viewBox="0 0 24 24">
+            <path d="M20 14.7A8.5 8.5 0 0 1 9.3 4a7.5 7.5 0 1 0 10.7 10.7Z"/>
+        </symbol>
+        <symbol id="icon-close" viewBox="0 0 24 24">
+            <path d="M6 6l12 12M18 6 6 18"/>
+        </symbol>
+        <symbol id="icon-external" viewBox="0 0 24 24">
+            <path d="M14 5h5v5M19 5l-9 9"/>
+            <path d="M19 14v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h4"/>
+        </symbol>
+        <symbol id="icon-coffee" viewBox="0 0 24 24">
+            <path d="M6 8h10v6a5 5 0 0 1-5 5 5 5 0 0 1-5-5V8Z"/>
+            <path d="M16 10h2a3 3 0 0 1 0 6h-2M7 3v2M11 3v2M15 3v2"/>
+        </symbol>
+        <symbol id="icon-chess" viewBox="0 0 24 24">
+            <path d="M9 4h6M10 4l.7 5h2.6L14 4M8 20h8M9 16h6l1 4H8l1-4ZM10 9h4l1 7H9l1-7Z"/>
+        </symbol>
+        <symbol id="icon-crazyland" viewBox="0 0 24 24">
+            <path d="M4 16c2.4-6.2 4.8-9 7.2-8.3 2 .6 2 4.2 4.1 4.8 1.6.5 3.2-.6 4.7-3.2"/>
+            <path d="M5 19h14M7 13h2M13 10h2M17 14h2"/>
+        </symbol>
+        <symbol id="icon-racket" viewBox="0 0 24 24">
+            <path d="M6.5 5.5c2-2 5.1-2.1 7-.2 1.9 1.9 1.8 5-.2 7s-5.1 2.1-7 .2c-1.9-1.9-1.8-5 .2-7Z"/>
+            <path d="M12.5 12.5 20 20M17.5 20H20v-2.5M7.5 8.5h5M9 6.8v6.4"/>
+        </symbol>
+        <symbol id="icon-cascade" viewBox="0 0 24 24">
+            <path d="M5 5h5v5H5V5ZM14 5h5v5h-5V5ZM5 14h5v5H5v-5ZM14 14h5v5h-5v-5Z"/>
+            <path d="M10 7.5h4M7.5 10v4M16.5 10v4M10 16.5h4"/>
+        </symbol>
+        <symbol id="icon-music" viewBox="0 0 24 24">
+            <path d="M9 18V6l10-2v12"/>
+            <path d="M6.5 20A2.5 2.5 0 1 0 6.5 15a2.5 2.5 0 0 0 0 5ZM16.5 18A2.5 2.5 0 1 0 16.5 13a2.5 2.5 0 0 0 0 5Z"/>
+        </symbol>
+        <symbol id="icon-brain" viewBox="0 0 24 24">
+            <path d="M9 5.2A3.2 3.2 0 0 0 5.8 8.4v.3A3.8 3.8 0 0 0 4 12a3.9 3.9 0 0 0 3.9 3.9H9V5.2Z"/>
+            <path d="M15 5.2a3.2 3.2 0 0 1 3.2 3.2v.3A3.8 3.8 0 0 1 20 12a3.9 3.9 0 0 1-3.9 3.9H15V5.2Z"/>
+            <path d="M9 10h3M12 7v10M12 14h3"/>
+        </symbol>
+        <symbol id="icon-book" viewBox="0 0 24 24">
+            <path d="M5 5.5A3.5 3.5 0 0 1 8.5 2H20v17H8.5A3.5 3.5 0 0 0 5 22V5.5Z"/>
+            <path d="M5 18.5A3.5 3.5 0 0 1 8.5 15H20"/>
+        </symbol>
+        <symbol id="icon-cards" viewBox="0 0 24 24">
+            <path d="M8 4h9a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z"/>
+            <path d="M10 8h5M10 12h6M10 16h4M5 7H4a2 2 0 0 0-2 2v10"/>
+        </symbol>
+        <symbol id="icon-signal" viewBox="0 0 24 24">
+            <path d="M4 17h2M8 17h2M12 17h2M16 17h4M6 13h4M14 13h4M4 9h6M14 9h6"/>
+        </symbol>
+    </svg>
+
+    <aside class="notice-bar" aria-label="Site notice">
+        <div class="notice-track">
+            <span class="notice-copy" data-banner-copy>All games are free to play. Have fun and support us with a donation.</span>
+            <span class="notice-copy" data-banner-copy aria-hidden="true">All games are free to play. Have fun and support us with a donation.</span>
         </div>
-    </div>
+    </aside>
 
-    <div class="container">
-        <header>
-            <h1 id="main-title">🎲 BlackOpz MicroGames</h1>
-            <p id="subtitle">🕹️ Explore, play, and challenge yourself! 🧩</p><br>
-            <button id="language-toggle" class="language-toggle">Español</button>
-        </header><br>
+    <div class="page-shell">
+        <header class="site-header">
+            <nav class="topbar" aria-label="Primary">
+                <a class="brand-lockup" href="#games" aria-label="BlackOpz MicroGames home">
+                    <span class="brand-mark" aria-hidden="true">
+                        <svg class="icon"><use href="#icon-brand"></use></svg>
+                    </span>
+                    <span>BlackOpz</span>
+                </a>
 
-        <div class="game-links">
-            <a href="https://chessmasteronline.vercel.app/" class="game-card" target="_blank">♟️🧙‍ ChessMaster Online </a>
-            <a href="https://crazyland.vercel.app/" class="game-card" target="_blank">🌈 CrazyLand </a>
-            <a href="https://racketblitz.vercel.app/" class="game-card" target="_blank">🏓 Racket Blitz </a>
-            <a href="https://emojicascade.vercel.app/" class="game-card" target="_blank">🎉 Emoji Cascade (beta)</a>
-            <a href="https://dm99-two.vercel.app/" class="game-card" target="_blank">🥁 Beat Maker Drum Machine 🤖</a>
-            <a href="https://learnwgmemorygame.vercel.app/" class="game-card" target="_blank">🧠 Learn English Memory Game</a>
-            <a href="https://jogodamemoria-ten.vercel.app/" class="game-card" target="_blank">📚 Jogo da Memória (Portuguese)</a>
-            <a href="https://learnwgmemorama.vercel.app/" class="game-card" target="_blank">🃏 Juego de Memoria (Spanish)</a>
-        </div>
+                <div class="toolbar" aria-label="Preferences">
+                    <button id="language-toggle" class="button button--quiet" type="button">
+                        <svg class="icon" aria-hidden="true"><use href="#icon-language"></use></svg>
+                        <span data-language-label>Español</span>
+                    </button>
+                    <button id="theme-toggle" class="icon-button" type="button" aria-label="Switch theme">
+                        <svg class="icon" aria-hidden="true"><use id="theme-icon" href="#icon-moon"></use></svg>
+                    </button>
+                </div>
+            </nav>
 
-        <footer>
-            <p>&copy; <span id="year"></span> BlackOpz MicroGames.🔥🎮✨</p>
-            <a href="https://buymeacoffee.com/georgegeorge" target="_blank" class="buy-coffee">☕ Buy Me a Coffee 🍩</a>
+            <section class="hero" aria-labelledby="main-title">
+                <div class="hero__eyebrow">
+                    <svg class="icon" aria-hidden="true"><use href="#icon-signal"></use></svg>
+                    <span data-eyebrow>Arcade Command Center</span>
+                </div>
+                <h1 id="main-title">BlackOpz MicroGames</h1>
+                <p id="subtitle">Choose a mission, open a game, and keep the streak alive.</p>
+            </section>
+        </header>
+
+        <main id="games" class="game-section" tabindex="-1">
+            <div class="section-heading">
+                <div>
+                    <p class="section-kicker" data-library-kicker>Live library</p>
+                    <h2 data-library-title>Pick your next run</h2>
+                </div>
+                <p data-library-description>Eight browser games, tuned for fast sessions and clean launches.</p>
+            </div>
+
+            <div class="game-links" aria-label="Game links">
+                <a href="https://chessmasteronline.vercel.app/" class="game-card reveal" target="_blank" rel="noopener noreferrer" data-game="chess">
+                    <span class="game-card__icon" aria-hidden="true"><svg class="icon"><use href="#icon-chess"></use></svg></span>
+                    <span class="game-card__body">
+                        <span class="game-card__kicker" data-card-kicker>Strategy</span>
+                        <span class="game-card__title" data-card-title>ChessMaster Online</span>
+                        <span class="game-card__description" data-card-description>Focused board play with a tactical edge.</span>
+                    </span>
+                    <span class="game-card__launch" aria-hidden="true"><svg class="icon"><use href="#icon-external"></use></svg></span>
+                </a>
+
+                <a href="https://crazyland.vercel.app/" class="game-card reveal" target="_blank" rel="noopener noreferrer" data-game="crazyland">
+                    <span class="game-card__icon" aria-hidden="true"><svg class="icon"><use href="#icon-crazyland"></use></svg></span>
+                    <span class="game-card__body">
+                        <span class="game-card__kicker" data-card-kicker>Arcade</span>
+                        <span class="game-card__title" data-card-title>CrazyLand</span>
+                        <span class="game-card__description" data-card-description>Bright, quick-play chaos for short breaks.</span>
+                    </span>
+                    <span class="game-card__launch" aria-hidden="true"><svg class="icon"><use href="#icon-external"></use></svg></span>
+                </a>
+
+                <a href="https://racketblitz.vercel.app/" class="game-card reveal" target="_blank" rel="noopener noreferrer" data-game="racketblitz">
+                    <span class="game-card__icon" aria-hidden="true"><svg class="icon"><use href="#icon-racket"></use></svg></span>
+                    <span class="game-card__body">
+                        <span class="game-card__kicker" data-card-kicker>Reflex</span>
+                        <span class="game-card__title" data-card-title>Racket Blitz</span>
+                        <span class="game-card__description" data-card-description>Fast rallies, clean timing, instant restarts.</span>
+                    </span>
+                    <span class="game-card__launch" aria-hidden="true"><svg class="icon"><use href="#icon-external"></use></svg></span>
+                </a>
+
+                <a href="https://emojicascade.vercel.app/" class="game-card reveal" target="_blank" rel="noopener noreferrer" data-game="cascade">
+                    <span class="game-card__icon" aria-hidden="true"><svg class="icon"><use href="#icon-cascade"></use></svg></span>
+                    <span class="game-card__body">
+                        <span class="game-card__kicker" data-card-kicker>Beta</span>
+                        <span class="game-card__title" data-card-title>Emoji Cascade</span>
+                        <span class="game-card__description" data-card-description>Pattern matching with a playful cascade loop.</span>
+                    </span>
+                    <span class="game-card__launch" aria-hidden="true"><svg class="icon"><use href="#icon-external"></use></svg></span>
+                </a>
+
+                <a href="https://dm99-two.vercel.app/" class="game-card reveal" target="_blank" rel="noopener noreferrer" data-game="drum">
+                    <span class="game-card__icon" aria-hidden="true"><svg class="icon"><use href="#icon-music"></use></svg></span>
+                    <span class="game-card__body">
+                        <span class="game-card__kicker" data-card-kicker>Music</span>
+                        <span class="game-card__title" data-card-title>Beat Maker Drum Machine</span>
+                        <span class="game-card__description" data-card-description>Tap out beats and build compact rhythms.</span>
+                    </span>
+                    <span class="game-card__launch" aria-hidden="true"><svg class="icon"><use href="#icon-external"></use></svg></span>
+                </a>
+
+                <a href="https://learnwgmemorygame.vercel.app/" class="game-card reveal" target="_blank" rel="noopener noreferrer" data-game="english">
+                    <span class="game-card__icon" aria-hidden="true"><svg class="icon"><use href="#icon-brain"></use></svg></span>
+                    <span class="game-card__body">
+                        <span class="game-card__kicker" data-card-kicker>Learning</span>
+                        <span class="game-card__title" data-card-title>Learn English Memory Game</span>
+                        <span class="game-card__description" data-card-description>Practice vocabulary through memory rounds.</span>
+                    </span>
+                    <span class="game-card__launch" aria-hidden="true"><svg class="icon"><use href="#icon-external"></use></svg></span>
+                </a>
+
+                <a href="https://jogodamemoria-ten.vercel.app/" class="game-card reveal" target="_blank" rel="noopener noreferrer" data-game="portuguese">
+                    <span class="game-card__icon" aria-hidden="true"><svg class="icon"><use href="#icon-book"></use></svg></span>
+                    <span class="game-card__body">
+                        <span class="game-card__kicker" data-card-kicker>Portuguese</span>
+                        <span class="game-card__title" data-card-title>Jogo da Memória</span>
+                        <span class="game-card__description" data-card-description>Portuguese memory practice in a simple loop.</span>
+                    </span>
+                    <span class="game-card__launch" aria-hidden="true"><svg class="icon"><use href="#icon-external"></use></svg></span>
+                </a>
+
+                <a href="https://learnwgmemorama.vercel.app/" class="game-card reveal" target="_blank" rel="noopener noreferrer" data-game="spanish">
+                    <span class="game-card__icon" aria-hidden="true"><svg class="icon"><use href="#icon-cards"></use></svg></span>
+                    <span class="game-card__body">
+                        <span class="game-card__kicker" data-card-kicker>Spanish</span>
+                        <span class="game-card__title" data-card-title>Juego de Memoria</span>
+                        <span class="game-card__description" data-card-description>Spanish memorama with a focused learning path.</span>
+                    </span>
+                    <span class="game-card__launch" aria-hidden="true"><svg class="icon"><use href="#icon-external"></use></svg></span>
+                </a>
+            </div>
+        </main>
+
+        <footer class="site-footer">
+            <p>&copy; <span id="year"></span> BlackOpz MicroGames. <span data-footer-copy>All rights reserved.</span></p>
+            <a href="https://buymeacoffee.com/georgegeorge" target="_blank" rel="noopener noreferrer" class="button button--accent buy-coffee">
+                <svg class="icon" aria-hidden="true"><use href="#icon-coffee"></use></svg>
+                <span data-donation-label>Buy Me a Coffee</span>
+            </a>
         </footer>
     </div>
-    <script src="script.js"></script>
+
+    <div id="welcome-modal" class="modal" aria-hidden="true" hidden>
+        <div class="modal__scrim" data-modal-dismiss></div>
+        <section class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="welcome-title" aria-describedby="welcome-message" tabindex="-1">
+            <button class="icon-button modal__close" id="close-modal" type="button" aria-label="Close welcome message">
+                <svg class="icon" aria-hidden="true"><use href="#icon-close"></use></svg>
+            </button>
+            <div class="modal__badge" aria-hidden="true">
+                <svg class="icon"><use href="#icon-brand"></use></svg>
+            </div>
+            <p class="modal__kicker" data-modal-kicker>Free to play</p>
+            <h2 id="welcome-title">Welcome to BlackOpz MicroGames</h2>
+            <p id="welcome-message">These games are free to play. If you enjoy them, consider supporting the project through the donation button.</p>
+            <div class="modal__actions">
+                <button id="modal-language-toggle" class="button button--quiet" type="button">
+                    <svg class="icon" aria-hidden="true"><use href="#icon-language"></use></svg>
+                    <span data-modal-language-label>Español</span>
+                </button>
+                <button id="modal-close-btn" class="button button--primary" type="button">
+                    <span data-modal-close-label>Start Playing</span>
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <div id="toast-region" class="toast-region" aria-live="polite" aria-atomic="true"></div>
 </body>
 </html>

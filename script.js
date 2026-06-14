@@ -1,239 +1,381 @@
-// Wait for the DOM to fully load
-document.addEventListener("DOMContentLoaded", () => {
-    // Set the current year in the footer
-    const yearElement = document.getElementById("year");
-    if (yearElement) {
-        yearElement.textContent = new Date().getFullYear();
-    }
+(() => {
+    const THEME_STORAGE_KEY = "blackopz-theme";
+    const root = document.documentElement;
 
-    // Language Toggle Elements
-    const languageToggleBtn = document.getElementById("language-toggle");
-    const modalLanguageToggleBtn = document.getElementById("modal-language-toggle");
-    const mainTitle = document.getElementById("main-title");
-    const subtitle = document.getElementById("subtitle");
-    const gameCards = document.querySelectorAll(".game-card");
-
-    let isEnglish = true;
-    let isAnimating = false; // Flag to prevent rapid toggling
-
-    // Elements that need to be translated
-    const translations = {
+    const copy = {
         en: {
-            mainTitle: "🎲 BlackOpz MicroGames",
-            subtitle: "🕹️ Explore, play, and challenge yourself! 🕹️",
+            documentTitle: "BlackOpz MicroGames",
+            banner: "All games are free to play. Have fun and support us with a donation.",
+            eyebrow: "Arcade Command Center",
+            mainTitle: "BlackOpz MicroGames",
+            subtitle: "Choose a mission, open a game, and keep the streak alive.",
             languageToggle: "Español",
-            welcomeTitle: "Welcome to BlackOps MicroGames!",
-            welcomeMessage: "These games are free to play. If you enjoy them, consider supporting us by clicking the 'Buy Me a Coffee' button. ☕",
-            modalCloseBtn: "Start Playing",
-            gameCards: [
-                /* Assuming indexes 5 and 7 exist */
-                null,
-                null,
-                null,
-                null,
-                null,
-                "🧠 Learn English Memory Game 🏆",
-                null,
-                "🧠 Memory Game (Spanish) 🎖️",
-                // Add more if needed
-            ],
+            languageAria: "Switch language to Spanish",
+            libraryKicker: "Live library",
+            libraryTitle: "Pick your next run",
+            libraryDescription: "Eight browser games, tuned for fast sessions and clean launches.",
+            footer: "All rights reserved.",
+            donation: "Buy Me a Coffee",
+            modalKicker: "Free to play",
+            welcomeTitle: "Welcome to BlackOpz MicroGames",
+            welcomeMessage: "These games are free to play. If you enjoy them, consider supporting the project through the donation button.",
+            modalClose: "Start Playing",
+            closeModalAria: "Close welcome message",
+            themeLight: "Switch to light theme",
+            themeDark: "Switch to dark theme",
+            toastLanguage: "Language set to English.",
+            toastThemeLight: "Light mode enabled.",
+            toastThemeDark: "Dark mode enabled.",
+            toastReady: "Game library ready.",
+            toastOpening: "Opening {title}.",
+            games: {
+                chess: ["Strategy", "ChessMaster Online", "Focused board play with a tactical edge."],
+                crazyland: ["Arcade", "CrazyLand", "Bright, quick-play chaos for short breaks."],
+                racketblitz: ["Reflex", "Racket Blitz", "Fast rallies, clean timing, instant restarts."],
+                cascade: ["Beta", "Emoji Cascade", "Pattern matching with a playful cascade loop."],
+                drum: ["Music", "Beat Maker Drum Machine", "Tap out beats and build compact rhythms."],
+                english: ["Learning", "Learn English Memory Game", "Practice vocabulary through memory rounds."],
+                portuguese: ["Portuguese", "Jogo da Memória", "Portuguese memory practice in a simple loop."],
+                spanish: ["Spanish", "Juego de Memoria", "Spanish memorama with a focused learning path."]
+            }
         },
         es: {
-            mainTitle: "🎲 BlackOpz MicroGames",
-            subtitle: "🕹️ ¡Explora, juega y desafíate a ti mismo! 🕹️",
+            documentTitle: "BlackOpz MicroJuegos",
+            banner: "Todos los juegos son gratis. Diviértete y apoya el proyecto con una donación.",
+            eyebrow: "Centro de Comando Arcade",
+            mainTitle: "BlackOpz MicroJuegos",
+            subtitle: "Elige una misión, abre un juego y mantén viva la racha.",
             languageToggle: "English",
-            welcomeTitle: "¡Bienvenido a BlackOps MicroJuegos!",
-            welcomeMessage: "Estos juegos son gratuitos. Si te gustan, considera apoyarnos haciendo clic en el botón 'Invítame un Café'. ☕",
-            modalCloseBtn: "Comenzar a Jugar",
-            gameCards: [
-                /* Assuming indexes 5 and 7 exist */
-                null,
-                null,
-                null,
-                null,
-                null,
-                "🧠 Aprende Inglés con Memoria 🏆",
-                null,
-                "🧠 Juego de Memoria (Español) 🎖️",
-                // Add more if needed
-            ],
+            languageAria: "Cambiar idioma a inglés",
+            libraryKicker: "Biblioteca activa",
+            libraryTitle: "Elige tu próxima partida",
+            libraryDescription: "Ocho juegos web, pensados para sesiones rápidas y lanzamientos limpios.",
+            footer: "Todos los derechos reservados.",
+            donation: "Invítame un Café",
+            modalKicker: "Gratis para jugar",
+            welcomeTitle: "Bienvenido a BlackOpz MicroJuegos",
+            welcomeMessage: "Estos juegos son gratuitos. Si te gustan, considera apoyar el proyecto con el botón de donación.",
+            modalClose: "Comenzar a jugar",
+            closeModalAria: "Cerrar mensaje de bienvenida",
+            themeLight: "Cambiar a modo claro",
+            themeDark: "Cambiar a modo oscuro",
+            toastLanguage: "Idioma cambiado a español.",
+            toastThemeLight: "Modo claro activado.",
+            toastThemeDark: "Modo oscuro activado.",
+            toastReady: "Biblioteca lista.",
+            toastOpening: "Abriendo {title}.",
+            games: {
+                chess: ["Estrategia", "ChessMaster Online", "Ajedrez enfocado con ventaja táctica."],
+                crazyland: ["Arcade", "CrazyLand", "Caos colorido para descansos rápidos."],
+                racketblitz: ["Reflejos", "Racket Blitz", "Rallys veloces, buen ritmo y reinicio instantáneo."],
+                cascade: ["Beta", "Emoji Cascade", "Patrones en cascada con ritmo juguetón."],
+                drum: ["Música", "Beat Maker Drum Machine", "Crea ritmos compactos con golpes rápidos."],
+                english: ["Aprendizaje", "Memoria para aprender inglés", "Practica vocabulario con rondas de memoria."],
+                portuguese: ["Portugués", "Jogo da Memória", "Práctica de memoria en portugués con una dinámica simple."],
+                spanish: ["Español", "Juego de Memoria", "Memorama en español con una ruta de aprendizaje clara."]
+            }
         }
     };
 
-    // Function to apply translations with animations
-    function applyTranslations(lang) {
-        // Add fade-out class to body for smooth transition
-        document.body.classList.add("fade-out");
+    const state = {
+        lang: "en",
+        theme: getInitialTheme()
+    };
 
-        // Wait for the fade-out animation to complete
-        setTimeout(() => {
-            // Update text content
-            mainTitle.textContent = translations[lang].mainTitle;
-            subtitle.textContent = translations[lang].subtitle;
-            languageToggleBtn.textContent = translations[lang].languageToggle;
-            modalLanguageToggleBtn.textContent = translations[lang].languageToggle;
+    const selectors = {};
+    let previousFocus = null;
+    let isModalOpen = false;
 
-            const welcomeTitle = document.getElementById("welcome-title");
-            const welcomeMessage = document.getElementById("welcome-message");
-            const modalCloseBtn = document.getElementById("modal-close-btn");
-
-            if (welcomeTitle) welcomeTitle.textContent = translations[lang].welcomeTitle;
-            if (welcomeMessage) welcomeMessage.textContent = translations[lang].welcomeMessage;
-            if (modalCloseBtn) modalCloseBtn.textContent = translations[lang].modalCloseBtn;
-
-            // Update specific game cards if they exist
-            translations[lang].gameCards.forEach((text, index) => {
-                if (text && gameCards[index]) {
-                    gameCards[index].textContent = text;
-                }
-            });
-
-            // Remove fade-out and add fade-in
-            document.body.classList.remove("fade-out");
-            document.body.classList.add("fade-in");
-
-            // Remove fade-in class after animation completes
-            setTimeout(() => {
-                document.body.classList.remove("fade-in");
-                isAnimating = false; // Re-enable toggling
-            }, 500); // Duration should match the CSS animation duration
-        }, 500); // Duration should match the CSS fade-out animation duration
+    function getInitialTheme() {
+        const stored = window.localStorage.getItem(THEME_STORAGE_KEY);
+        if (stored === "light" || stored === "dark") {
+            return stored;
+        }
+        return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
     }
 
-    // Toggle between English and Spanish content with animation
+    function getCurrentCopy() {
+        return copy[state.lang];
+    }
+
+    function setText(target, value) {
+        if (target) {
+            target.textContent = value;
+        }
+    }
+
+    function applyTheme({ persist = false, announce = false } = {}) {
+        root.dataset.theme = state.theme;
+
+        if (persist) {
+            window.localStorage.setItem(THEME_STORAGE_KEY, state.theme);
+        }
+
+        if (selectors.themeToggle && selectors.themeIcon) {
+            const text = getCurrentCopy();
+            const isDark = state.theme === "dark";
+            selectors.themeIcon.setAttribute("href", isDark ? "#icon-sun" : "#icon-moon");
+            selectors.themeToggle.setAttribute("aria-label", isDark ? text.themeLight : text.themeDark);
+            selectors.themeToggle.setAttribute("title", isDark ? text.themeLight : text.themeDark);
+        }
+
+        if (announce) {
+            showToast(state.theme === "dark" ? getCurrentCopy().toastThemeDark : getCurrentCopy().toastThemeLight);
+            emitBurst(selectors.themeToggle);
+        }
+    }
+
+    function applyLanguage({ announce = false } = {}) {
+        const text = getCurrentCopy();
+        root.lang = state.lang;
+        document.title = text.documentTitle;
+
+        document.querySelectorAll("[data-banner-copy]").forEach((node) => setText(node, text.banner));
+        setText(selectors.eyebrow, text.eyebrow);
+        setText(selectors.mainTitle, text.mainTitle);
+        setText(selectors.subtitle, text.subtitle);
+        setText(selectors.libraryKicker, text.libraryKicker);
+        setText(selectors.libraryTitle, text.libraryTitle);
+        setText(selectors.libraryDescription, text.libraryDescription);
+        setText(selectors.footerCopy, text.footer);
+        setText(selectors.donationLabel, text.donation);
+        setText(selectors.modalKicker, text.modalKicker);
+        setText(selectors.welcomeTitle, text.welcomeTitle);
+        setText(selectors.welcomeMessage, text.welcomeMessage);
+        setText(selectors.modalCloseLabel, text.modalClose);
+        setText(selectors.languageLabel, text.languageToggle);
+        setText(selectors.modalLanguageLabel, text.languageToggle);
+
+        if (selectors.languageToggle) {
+            selectors.languageToggle.setAttribute("aria-label", text.languageAria);
+        }
+
+        if (selectors.modalLanguageToggle) {
+            selectors.modalLanguageToggle.setAttribute("aria-label", text.languageAria);
+        }
+
+        if (selectors.closeModal) {
+            selectors.closeModal.setAttribute("aria-label", text.closeModalAria);
+        }
+
+        document.querySelectorAll(".game-card").forEach((card) => {
+            const game = text.games[card.dataset.game];
+            if (!game) return;
+
+            const [kicker, title, description] = game;
+            setText(card.querySelector("[data-card-kicker]"), kicker);
+            setText(card.querySelector("[data-card-title]"), title);
+            setText(card.querySelector("[data-card-description]"), description);
+            card.setAttribute("aria-label", `${title}. ${description}`);
+        });
+
+        applyTheme();
+
+        if (announce) {
+            showToast(text.toastLanguage);
+            emitBurst(selectors.languageToggle);
+        }
+    }
+
     function toggleLanguage() {
-        if (isAnimating) return; // Prevent toggling during animation
-        isAnimating = true;
-
-        isEnglish = !isEnglish;
-        const lang = isEnglish ? 'en' : 'es';
-        applyTranslations(lang);
+        state.lang = state.lang === "en" ? "es" : "en";
+        root.classList.add("is-translating");
+        applyLanguage({ announce: true });
+        window.setTimeout(() => root.classList.remove("is-translating"), 240);
     }
 
-    // Attach event listeners to language toggle buttons
-    if (languageToggleBtn) {
-        languageToggleBtn.addEventListener("click", toggleLanguage);
+    function toggleTheme() {
+        state.theme = state.theme === "dark" ? "light" : "dark";
+        applyTheme({ persist: true, announce: true });
     }
 
-    if (modalLanguageToggleBtn) {
-        modalLanguageToggleBtn.addEventListener("click", toggleLanguage);
-    }
-
-    // Modal Elements
-    const welcomeModal = document.getElementById("welcome-modal");
-    const closeModalBtn = document.getElementById("close-modal");
-    const modalCloseBtnElement = document.getElementById("modal-close-btn");
-
-    // Function to open the modal with animation
     function openWelcomeModal() {
-        if (welcomeModal) {
-            welcomeModal.classList.add("open");
-            welcomeModal.setAttribute("aria-hidden", "false");
-            // Trap focus inside the modal
-            trapFocus(welcomeModal);
+        const modal = selectors.welcomeModal;
+        if (!modal || isModalOpen) return;
+
+        previousFocus = document.activeElement;
+        isModalOpen = true;
+        modal.hidden = false;
+        modal.setAttribute("aria-hidden", "false");
+        document.body.classList.add("modal-lock");
+
+        requestAnimationFrame(() => {
+            modal.classList.add("is-open");
+            selectors.modalDialog?.focus({ preventScroll: true });
+        });
+    }
+
+    function closeWelcomeModal({ celebrate = false } = {}) {
+        const modal = selectors.welcomeModal;
+        if (!modal || !isModalOpen) return;
+
+        isModalOpen = false;
+        modal.classList.remove("is-open");
+        modal.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("modal-lock");
+
+        if (celebrate) {
+            showToast(getCurrentCopy().toastReady);
+            emitBurst(selectors.modalClose);
         }
-    }
 
-    // Function to close the modal with animation
-    function closeWelcomeModal() {
-        if (welcomeModal) {
-            welcomeModal.classList.add("fade-out");
-            welcomeModal.classList.remove("open");
-            welcomeModal.setAttribute("aria-hidden", "true");
-            // Remove focus trap after animation
-            setTimeout(() => {
-                welcomeModal.classList.remove("fade-out");
-                removeTrapFocus();
-            }, 500); // Duration should match the CSS fade-out animation duration
-        }
-    }
-
-    // Show the modal on page load with animation
-    window.addEventListener("load", () => {
-        openWelcomeModal();
-    });
-
-    // Close modal when the close button or Start Playing button is clicked
-    if (closeModalBtn) {
-        closeModalBtn.addEventListener("click", closeWelcomeModal);
-    }
-
-    if (modalCloseBtnElement) {
-        modalCloseBtnElement.addEventListener("click", closeWelcomeModal);
-    }
-
-    // Close modal if clicking outside the modal content
-    window.addEventListener("click", (event) => {
-        if (event.target === welcomeModal) {
-            closeWelcomeModal();
-        }
-    });
-
-    // Close modal with Escape key
-    window.addEventListener("keydown", (event) => {
-        if (event.key === "Escape" && welcomeModal.classList.contains("open")) {
-            closeWelcomeModal();
-        }
-    });
-
-    // Accessibility: Trap focus within the modal
-    let focusableElementsString = 'a[href], area[href], input:not([disabled]), select:not([disabled]),' +
-        'textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex="0"],' +
-        '[contenteditable]';
-    let focusableElements;
-    let firstFocusableElement;
-    let lastFocusableElement;
-
-    function trapFocus(modal) {
-        focusableElements = modal.querySelectorAll(focusableElementsString);
-        if (focusableElements.length === 0) return;
-        firstFocusableElement = focusableElements[0];
-        lastFocusableElement = focusableElements[focusableElements.length - 1];
-
-        // Focus the first focusable element
-        firstFocusableElement.focus();
-
-        // Listen for tab events
-        modal.addEventListener('keydown', handleFocusTrap);
-    }
-
-    function handleFocusTrap(e) {
-        if (e.key !== 'Tab') return;
-
-        if (e.shiftKey) { // Shift + Tab
-            if (document.activeElement === firstFocusableElement) {
-                e.preventDefault();
-                lastFocusableElement.focus();
+        window.setTimeout(() => {
+            modal.hidden = true;
+            if (previousFocus && typeof previousFocus.focus === "function") {
+                previousFocus.focus({ preventScroll: true });
             }
-        } else { // Tab
-            if (document.activeElement === lastFocusableElement) {
-                e.preventDefault();
-                firstFocusableElement.focus();
+        }, 260);
+    }
+
+    function handleModalKeydown(event) {
+        if (!isModalOpen || !selectors.welcomeModal) return;
+
+        if (event.key === "Escape") {
+            closeWelcomeModal();
+            return;
+        }
+
+        if (event.key !== "Tab") return;
+
+        const focusable = selectors.welcomeModal.querySelectorAll(
+            'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        );
+
+        if (!focusable.length) return;
+
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+
+        if (event.shiftKey && document.activeElement === first) {
+            event.preventDefault();
+            last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+            event.preventDefault();
+            first.focus();
+        }
+    }
+
+    function showToast(message) {
+        if (!selectors.toastRegion || !message) return;
+
+        const toast = document.createElement("div");
+        toast.className = "toast";
+        toast.setAttribute("role", "status");
+        toast.textContent = message;
+        selectors.toastRegion.append(toast);
+
+        window.setTimeout(() => toast.classList.add("is-leaving"), 2600);
+        window.setTimeout(() => toast.remove(), 2950);
+    }
+
+    function emitBurst(target) {
+        if (!target || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+        const rect = target.getBoundingClientRect();
+        const burst = document.createElement("div");
+        burst.className = "burst";
+        burst.style.setProperty("--burst-x", `${rect.left + rect.width / 2}px`);
+        burst.style.setProperty("--burst-y", `${rect.top + rect.height / 2}px`);
+
+        const colors = ["var(--color-accent-strong)", "var(--color-lime)", "var(--color-coral)", "var(--color-gold)"];
+        for (let index = 0; index < 10; index += 1) {
+            const particle = document.createElement("span");
+            particle.style.setProperty("--angle", `${index * 36}deg`);
+            particle.style.setProperty("--burst-color", colors[index % colors.length]);
+            burst.append(particle);
+        }
+
+        document.body.append(burst);
+        window.setTimeout(() => burst.remove(), 720);
+    }
+
+    function prepareRevealAnimations() {
+        const revealItems = document.querySelectorAll(".reveal");
+
+        if (!("IntersectionObserver" in window)) {
+            revealItems.forEach((item) => item.classList.add("is-visible"));
+            return;
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add("is-visible");
+                observer.unobserve(entry.target);
+            });
+        }, { threshold: 0.18 });
+
+        revealItems.forEach((item, index) => {
+            item.style.transitionDelay = `${Math.min(index * 45, 280)}ms`;
+            observer.observe(item);
+        });
+    }
+
+    function bindGameCards() {
+        document.querySelectorAll(".game-card").forEach((card) => {
+            card.addEventListener("click", () => {
+                const title = card.querySelector("[data-card-title]")?.textContent?.trim() || "game";
+                showToast(getCurrentCopy().toastOpening.replace("{title}", title));
+                emitBurst(card);
+            });
+        });
+    }
+
+    function cacheSelectors() {
+        selectors.year = document.getElementById("year");
+        selectors.languageToggle = document.getElementById("language-toggle");
+        selectors.modalLanguageToggle = document.getElementById("modal-language-toggle");
+        selectors.languageLabel = document.querySelector("[data-language-label]");
+        selectors.modalLanguageLabel = document.querySelector("[data-modal-language-label]");
+        selectors.themeToggle = document.getElementById("theme-toggle");
+        selectors.themeIcon = document.getElementById("theme-icon");
+        selectors.eyebrow = document.querySelector("[data-eyebrow]");
+        selectors.mainTitle = document.getElementById("main-title");
+        selectors.subtitle = document.getElementById("subtitle");
+        selectors.libraryKicker = document.querySelector("[data-library-kicker]");
+        selectors.libraryTitle = document.querySelector("[data-library-title]");
+        selectors.libraryDescription = document.querySelector("[data-library-description]");
+        selectors.footerCopy = document.querySelector("[data-footer-copy]");
+        selectors.donationLabel = document.querySelector("[data-donation-label]");
+        selectors.welcomeModal = document.getElementById("welcome-modal");
+        selectors.modalDialog = document.querySelector(".modal__dialog");
+        selectors.closeModal = document.getElementById("close-modal");
+        selectors.modalClose = document.getElementById("modal-close-btn");
+        selectors.modalCloseLabel = document.querySelector("[data-modal-close-label]");
+        selectors.modalKicker = document.querySelector("[data-modal-kicker]");
+        selectors.welcomeTitle = document.getElementById("welcome-title");
+        selectors.welcomeMessage = document.getElementById("welcome-message");
+        selectors.toastRegion = document.getElementById("toast-region");
+    }
+
+    function bindEvents() {
+        selectors.languageToggle?.addEventListener("click", toggleLanguage);
+        selectors.modalLanguageToggle?.addEventListener("click", toggleLanguage);
+        selectors.themeToggle?.addEventListener("click", toggleTheme);
+        selectors.closeModal?.addEventListener("click", () => closeWelcomeModal());
+        selectors.modalClose?.addEventListener("click", () => closeWelcomeModal({ celebrate: true }));
+        selectors.welcomeModal?.addEventListener("click", (event) => {
+            if (event.target?.matches("[data-modal-dismiss]")) {
+                closeWelcomeModal();
             }
-        }
+        });
+        document.addEventListener("keydown", handleModalKeydown);
     }
 
-    function removeTrapFocus() {
-        if (welcomeModal) {
-            welcomeModal.removeEventListener('keydown', handleFocusTrap);
-        }
+    function init() {
+        cacheSelectors();
+        setText(selectors.year, new Date().getFullYear());
+        applyTheme();
+        applyLanguage();
+        bindEvents();
+        bindGameCards();
+        prepareRevealAnimations();
+        window.addEventListener("load", openWelcomeModal, { once: true });
     }
 
-    // Optional: Add debouncing if needed for other functions
-    // Example debounce function
-    function debounce(func, wait) {
-        let timeout;
-        return function(...args) {
-            const later = () => {
-                clearTimeout(timeout);
-                func.apply(this, args);
-            };
-            clearTimeout(timeout);
-            timeout = setTimeout(later, wait);
-        };
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", init, { once: true });
+    } else {
+        init();
     }
-
-    // Example usage of debounce (not currently needed)
-    // const debouncedToggle = debounce(toggleLanguage, 300);
-    // languageToggleBtn.addEventListener("click", debouncedToggle);
-});
+})();
