@@ -1,23 +1,28 @@
 # BlackOpz MicroGames Design System
 
-## Palette
-- The app uses semantic CSS tokens, with light mode as the base and dark mode applied through `data-theme="dark"` or the visitor's OS preference.
-- Core surfaces are neutral graphite and clean paper tones, balanced with teal, lime, coral, and gold accents for the arcade-command feel.
-- Interactive focus uses a high-contrast teal ring, while donation and success moments use gold/coral/lime accents for warmth.
+## Stack
+- The app is a minimal Vite vanilla project. Important game, FAQ, and SEO content stays static in `index.html`; `src/main.js` only enhances the page after load.
+- Runtime dependencies are intentionally lightweight: Geist for self-hosted typography, Lucide for SVG icons, Motion for transform/opacity animation, Lenis for smooth scrolling, and modern-normalize for browser consistency.
+- The AdSense script is intentionally absent from the page for performance. The root `ads.txt` file remains unchanged, and `public/ads.txt` preserves the same metadata in Vite builds.
 
-## Spacing, Radius, Shadows, Type
-- Spacing follows a compact 4px-based scale from `--space-1` through `--space-16`.
-- Radius tokens run from 4px to 16px, with game cards capped at 8px for a precise launcher aesthetic.
-- Shadows progress from subtle elevation to a controlled glow used only on premium interactive states.
-- The required `Zen Dots` font is preserved everywhere. Type sizes are tokenized and adjusted with media queries instead of viewport-scaling formulas.
+## Palette
+- Light mode starts from clean paper and graphite neutrals.
+- Dark mode uses deep neutral surfaces with the same semantic tokens.
+- Teal/mint is the primary command accent, with lime, coral, and gold reserved for positive action, donation, and lightweight celebration states.
+
+## Typography, Spacing, Radius
+- Geist Sans is the primary UI face and Geist Mono is used for compact labels, stats, and arcade-like metadata.
+- Type sizes are tokenized and adjusted with media queries instead of viewport-scaling formulas.
+- Spacing follows a compact 4px-based scale. Repeated game cards keep an 8px radius for the precise launcher aesthetic.
 
 ## Components
-- Buttons and icon buttons share one interaction model: clear focus rings, hover lift, pressed scale, disabled-ready states, and consistent SVG icons.
-- Game cards are semantic external links with icon, label, description, and launch affordance. The exact destination URLs are unchanged.
-- The welcome modal uses accessible dialog semantics, focus trapping, Escape/backdrop dismissal, and restored focus after closing.
-- Toasts provide lightweight feedback for theme changes, language changes, modal start, and game launches.
+- Game cards are semantic external links with a Lucide icon, category, title, description, and launch affordance. Destination URLs are unchanged.
+- The first-visit welcome message is a non-blocking sheet, remembered with `blackopz-welcome-dismissed`.
+- Theme and language preferences use `blackopz-theme` and `blackopz-lang`.
+- Toasts provide lightweight feedback for preference changes, first-visit dismissal, and game launch intent.
 
-## Motion and Accessibility
-- Motion is limited to transform and opacity for smooth rendering: marquee notice, card entrances, modal transitions, button feedback, and small success bursts.
-- `prefers-reduced-motion` disables marquee, entrance transitions, and bursts for users who request less motion.
-- The page includes a skip link, semantic landmarks, ARIA labels, keyboard-operable controls, and no emoji characters in the UI.
+## Motion, Rendering, Accessibility
+- Enhanced motion uses transform and opacity only, with Motion handling entrances, sheet transitions, toast movement, and small bursts.
+- Lenis is enabled only when the visitor has not requested reduced motion.
+- `prefers-reduced-motion` disables enhanced motion and smooth scroll while keeping all content visible.
+- The page includes semantic landmarks, a skip link, keyboard-operable controls, focus rings, accessible labels, and decorative icons marked as hidden.

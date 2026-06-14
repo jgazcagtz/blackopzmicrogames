@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="BlackOpz MicroGames">
+  <rect width="64" height="64" rx="14" fill="#071314"/>
+  <path d="M18 24c0-4.4 3.6-8 8-8h12c4.4 0 8 3.6 8 8v12c0 4.4-3.6 8-8 8H26c-4.4 0-8-3.6-8-8V24Z" fill="#2dd4bf"/>
+  <path d="M26 29v8M22 33h8M39 29h.1M43 35h.1" fill="none" stroke="#071314" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M14 48h36" stroke="#84cc16" stroke-width="4" stroke-linecap="round"/>
+</svg>
