@@ -11,6 +11,7 @@
   "dependencies": {
     "@fontsource-variable/geist": "^5.2.9",
     "@fontsource-variable/geist-mono": "^5.2.8",
+    "@fontsource/zen-dots": "^5.2.8",
     "lenis": "latest",
     "lucide": "latest",
     "modern-normalize": "latest",

@@ -73,6 +73,7 @@ const copy = {
         mainTitle: "BlackOpz MicroGames",
         subtitle: "Pick a compact web game and jump into a quick run.",
         playNow: "Play now",
+        openGame: "Open game",
         donation: "Buy Me a Coffee",
         metricGames: "free games",
         metricInstalls: "installs",
@@ -127,6 +128,7 @@ const copy = {
         mainTitle: "BlackOpz MicroJuegos",
         subtitle: "Elige un juego web compacto y entra a una partida rápida.",
         playNow: "Jugar ahora",
+        openGame: "Abrir juego",
         donation: "Invítame un Café",
         metricGames: "juegos gratis",
         metricInstalls: "instalaciones",
@@ -209,7 +211,7 @@ function getInitialTheme() {
     if (stored === "light" || stored === "dark") {
         return stored;
     }
-    return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    return "dark";
 }
 
 function shouldReduceMotion() {
@@ -335,6 +337,7 @@ function toggleTheme() {
 
 function showWelcomeSheet() {
     if (!selectors.welcomeSheet || storageGet(WELCOME_STORAGE_KEY) === "true") return;
+    if (window.matchMedia("(max-width: 760px)").matches) return;
 
     selectors.welcomeSheet.hidden = false;
     selectors.welcomeSheet.setAttribute("aria-hidden", "false");
@@ -449,7 +452,7 @@ function setupMotion() {
     root.classList.add("motion-ready");
 
     animate(
-        ".topbar, .hero__eyebrow, .hero h1, .hero__subtitle, .hero__actions, .command-strip",
+        ".topbar, .hero__eyebrow, .hero h1, .hero__subtitle, .hero__actions, .hero__visual",
         { opacity: [0, 1], y: [16, 0] },
         { delay: stagger(0.055), duration: 0.62, ease: [0.16, 1, 0.3, 1] }
     );
@@ -533,7 +536,7 @@ function init() {
         setupMotion();
     }
 
-    window.setTimeout(showWelcomeSheet, 850);
+    window.setTimeout(showWelcomeSheet, 2400);
 }
 
 if (document.readyState === "loading") {

@@ -6,7 +6,7 @@
     <meta name="color-scheme" content="light dark">
     <meta name="robots" content="index, follow">
     <meta name="description" content="BlackOpz MicroGames is a fast launcher for eight free browser games, including chess, arcade, racket, emoji puzzle, music, and memory games.">
-    <meta name="theme-color" content="#0f766e">
+    <meta name="theme-color" content="#09090d">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="BlackOpz MicroGames">
     <meta property="og:title" content="BlackOpz MicroGames | Free Browser Game Arcade">
@@ -141,18 +141,26 @@
                     </div>
                 </div>
 
-                <div class="command-strip reveal" aria-label="Library highlights">
-                    <div class="metric">
-                        <span class="metric__value">8</span>
-                        <span class="metric__label" data-i18n="metricGames">free games</span>
+                <div class="hero__visual reveal">
+                    <div class="arcade-screen" aria-hidden="true">
+                        <img class="arcade-screen__image arcade-screen__image--main" src="/previews/racketblitz.jpg" alt="" loading="eager" decoding="async">
+                        <img class="arcade-screen__image arcade-screen__image--stack arcade-screen__image--one" src="/previews/chess.jpg" alt="" loading="eager" decoding="async">
+                        <img class="arcade-screen__image arcade-screen__image--stack arcade-screen__image--two" src="/previews/cascade.jpg" alt="" loading="eager" decoding="async">
                     </div>
-                    <div class="metric">
-                        <span class="metric__value">0</span>
-                        <span class="metric__label" data-i18n="metricInstalls">installs</span>
-                    </div>
-                    <div class="metric">
-                        <span class="metric__value" data-i18n="metricQuickValue">quick</span>
-                        <span class="metric__label" data-i18n="metricQuick">sessions</span>
+
+                    <div class="command-strip" aria-label="Library highlights">
+                        <div class="metric">
+                            <span class="metric__value">8</span>
+                            <span class="metric__label" data-i18n="metricGames">free games</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric__value">0</span>
+                            <span class="metric__label" data-i18n="metricInstalls">installs</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric__value" data-i18n="metricQuickValue">quick</span>
+                            <span class="metric__label" data-i18n="metricQuick">sessions</span>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -170,83 +178,147 @@
 
                 <div class="game-links" aria-label="Game links">
                     <a href="https://chessmasteronline.vercel.app/" class="game-card reveal" target="_blank" rel="noopener noreferrer" data-game="chess">
-                        <span class="game-card__icon" data-icon="crown" aria-hidden="true"></span>
+                        <span class="game-card__media" aria-hidden="true">
+                            <img src="/previews/chess.jpg" alt="" loading="lazy" decoding="async">
+                        </span>
                         <span class="game-card__body">
-                            <span class="game-card__kicker" data-card-kicker>Strategy</span>
+                            <span class="game-card__topline">
+                                <span class="game-card__icon" data-icon="crown" aria-hidden="true"></span>
+                                <span class="game-card__kicker" data-card-kicker>Strategy</span>
+                            </span>
                             <span class="game-card__title" data-card-title>ChessMaster Online</span>
                             <span class="game-card__description" data-card-description>Focused board play with a tactical edge.</span>
+                            <span class="game-card__cta">
+                                <span data-i18n="openGame">Open game</span>
+                                <span data-icon="external-link" aria-hidden="true"></span>
+                            </span>
                         </span>
-                        <span class="game-card__launch" data-icon="external-link" aria-hidden="true"></span>
                     </a>
 
                     <a href="https://crazyland.vercel.app/" class="game-card reveal" target="_blank" rel="noopener noreferrer" data-game="crazyland">
-                        <span class="game-card__icon" data-icon="sparkles" aria-hidden="true"></span>
+                        <span class="game-card__media" aria-hidden="true">
+                            <img src="/previews/crazyland.jpg" alt="" loading="lazy" decoding="async">
+                        </span>
                         <span class="game-card__body">
-                            <span class="game-card__kicker" data-card-kicker>Arcade</span>
+                            <span class="game-card__topline">
+                                <span class="game-card__icon" data-icon="sparkles" aria-hidden="true"></span>
+                                <span class="game-card__kicker" data-card-kicker>Arcade</span>
+                            </span>
                             <span class="game-card__title" data-card-title>CrazyLand</span>
                             <span class="game-card__description" data-card-description>Bright, quick-play chaos for short breaks.</span>
+                            <span class="game-card__cta">
+                                <span data-i18n="openGame">Open game</span>
+                                <span data-icon="external-link" aria-hidden="true"></span>
+                            </span>
                         </span>
-                        <span class="game-card__launch" data-icon="external-link" aria-hidden="true"></span>
                     </a>
 
                     <a href="https://racketblitz.vercel.app/" class="game-card reveal" target="_blank" rel="noopener noreferrer" data-game="racketblitz">
-                        <span class="game-card__icon" data-icon="zap" aria-hidden="true"></span>
+                        <span class="game-card__media" aria-hidden="true">
+                            <img src="/previews/racketblitz.jpg" alt="" loading="lazy" decoding="async">
+                        </span>
                         <span class="game-card__body">
-                            <span class="game-card__kicker" data-card-kicker>Reflex</span>
+                            <span class="game-card__topline">
+                                <span class="game-card__icon" data-icon="zap" aria-hidden="true"></span>
+                                <span class="game-card__kicker" data-card-kicker>Reflex</span>
+                            </span>
                             <span class="game-card__title" data-card-title>Racket Blitz</span>
                             <span class="game-card__description" data-card-description>Fast rallies, clean timing, instant restarts.</span>
+                            <span class="game-card__cta">
+                                <span data-i18n="openGame">Open game</span>
+                                <span data-icon="external-link" aria-hidden="true"></span>
+                            </span>
                         </span>
-                        <span class="game-card__launch" data-icon="external-link" aria-hidden="true"></span>
                     </a>
 
                     <a href="https://emojicascade.vercel.app/" class="game-card reveal" target="_blank" rel="noopener noreferrer" data-game="cascade">
-                        <span class="game-card__icon" data-icon="grid-2x2" aria-hidden="true"></span>
+                        <span class="game-card__media" aria-hidden="true">
+                            <img src="/previews/cascade.jpg" alt="" loading="lazy" decoding="async">
+                        </span>
                         <span class="game-card__body">
-                            <span class="game-card__kicker" data-card-kicker>Puzzle</span>
+                            <span class="game-card__topline">
+                                <span class="game-card__icon" data-icon="grid-2x2" aria-hidden="true"></span>
+                                <span class="game-card__kicker" data-card-kicker>Puzzle</span>
+                            </span>
                             <span class="game-card__title" data-card-title>Emoji Cascade</span>
                             <span class="game-card__description" data-card-description>Pattern matching with a playful cascade loop.</span>
+                            <span class="game-card__cta">
+                                <span data-i18n="openGame">Open game</span>
+                                <span data-icon="external-link" aria-hidden="true"></span>
+                            </span>
                         </span>
-                        <span class="game-card__launch" data-icon="external-link" aria-hidden="true"></span>
                     </a>
 
                     <a href="https://dm99-two.vercel.app/" class="game-card reveal" target="_blank" rel="noopener noreferrer" data-game="drum">
-                        <span class="game-card__icon" data-icon="music-2" aria-hidden="true"></span>
+                        <span class="game-card__media" aria-hidden="true">
+                            <img src="/previews/drum.jpg" alt="" loading="lazy" decoding="async">
+                        </span>
                         <span class="game-card__body">
-                            <span class="game-card__kicker" data-card-kicker>Music</span>
+                            <span class="game-card__topline">
+                                <span class="game-card__icon" data-icon="music-2" aria-hidden="true"></span>
+                                <span class="game-card__kicker" data-card-kicker>Music</span>
+                            </span>
                             <span class="game-card__title" data-card-title>Beat Maker Drum Machine</span>
                             <span class="game-card__description" data-card-description>Tap out beats and build compact rhythms.</span>
+                            <span class="game-card__cta">
+                                <span data-i18n="openGame">Open game</span>
+                                <span data-icon="external-link" aria-hidden="true"></span>
+                            </span>
                         </span>
-                        <span class="game-card__launch" data-icon="external-link" aria-hidden="true"></span>
                     </a>
 
                     <a href="https://learnwgmemorygame.vercel.app/" class="game-card reveal" target="_blank" rel="noopener noreferrer" data-game="english">
-                        <span class="game-card__icon" data-icon="brain" aria-hidden="true"></span>
+                        <span class="game-card__media" aria-hidden="true">
+                            <img src="/previews/english.jpg" alt="" loading="lazy" decoding="async">
+                        </span>
                         <span class="game-card__body">
-                            <span class="game-card__kicker" data-card-kicker>Learning</span>
+                            <span class="game-card__topline">
+                                <span class="game-card__icon" data-icon="brain" aria-hidden="true"></span>
+                                <span class="game-card__kicker" data-card-kicker>Learning</span>
+                            </span>
                             <span class="game-card__title" data-card-title>Learn English Memory Game</span>
                             <span class="game-card__description" data-card-description>Practice vocabulary through memory rounds.</span>
+                            <span class="game-card__cta">
+                                <span data-i18n="openGame">Open game</span>
+                                <span data-icon="external-link" aria-hidden="true"></span>
+                            </span>
                         </span>
-                        <span class="game-card__launch" data-icon="external-link" aria-hidden="true"></span>
                     </a>
 
                     <a href="https://jogodamemoria-ten.vercel.app/" class="game-card reveal" target="_blank" rel="noopener noreferrer" data-game="portuguese">
-                        <span class="game-card__icon" data-icon="book-open" aria-hidden="true"></span>
+                        <span class="game-card__media" aria-hidden="true">
+                            <img src="/previews/portuguese.jpg" alt="" loading="lazy" decoding="async">
+                        </span>
                         <span class="game-card__body">
-                            <span class="game-card__kicker" data-card-kicker>Portuguese</span>
+                            <span class="game-card__topline">
+                                <span class="game-card__icon" data-icon="book-open" aria-hidden="true"></span>
+                                <span class="game-card__kicker" data-card-kicker>Portuguese</span>
+                            </span>
                             <span class="game-card__title" data-card-title>Jogo da Memória</span>
                             <span class="game-card__description" data-card-description>Portuguese memory practice in a simple loop.</span>
+                            <span class="game-card__cta">
+                                <span data-i18n="openGame">Open game</span>
+                                <span data-icon="external-link" aria-hidden="true"></span>
+                            </span>
                         </span>
-                        <span class="game-card__launch" data-icon="external-link" aria-hidden="true"></span>
                     </a>
 
                     <a href="https://learnwgmemorama.vercel.app/" class="game-card reveal" target="_blank" rel="noopener noreferrer" data-game="spanish">
-                        <span class="game-card__icon" data-icon="panels-top-left" aria-hidden="true"></span>
+                        <span class="game-card__media" aria-hidden="true">
+                            <img src="/previews/spanish.jpg" alt="" loading="lazy" decoding="async">
+                        </span>
                         <span class="game-card__body">
-                            <span class="game-card__kicker" data-card-kicker>Spanish</span>
+                            <span class="game-card__topline">
+                                <span class="game-card__icon" data-icon="panels-top-left" aria-hidden="true"></span>
+                                <span class="game-card__kicker" data-card-kicker>Spanish</span>
+                            </span>
                             <span class="game-card__title" data-card-title>Juego de Memoria</span>
                             <span class="game-card__description" data-card-description>Spanish memorama with a focused learning path.</span>
+                            <span class="game-card__cta">
+                                <span data-i18n="openGame">Open game</span>
+                                <span data-icon="external-link" aria-hidden="true"></span>
+                            </span>
                         </span>
-                        <span class="game-card__launch" data-icon="external-link" aria-hidden="true"></span>
                     </a>
                 </div>
             </section>
